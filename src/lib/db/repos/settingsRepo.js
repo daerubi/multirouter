@@ -85,6 +85,10 @@ const DEFAULT_SETTINGS = {
   // OpenCode Free ships one card with two lanes; this flag picks the lane the
   // `opencode` executor uses (false = direct TLS request, true = local CLI).
   opencodeCliMode: false,
+  // FreeLLMAPI upstream integration (hybrid C): base URL of freellmapi instance
+  freellmapiBaseUrl: "http://localhost:3001",
+  freellmapiAutoSync: false,
+  freellmapiSyncIntervalMs: 300000,
   // Per-provider web-cookie tool calling enablement: { [providerId]: boolean }
   webCookieToolCalling: {
     "gemini-web": true,

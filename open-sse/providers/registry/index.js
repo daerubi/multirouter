@@ -152,8 +152,54 @@ import p154 from "./veoaifree-web.js";
 import p156 from "./runcrate.js";
 import p157 from "./nace.js";
 import p158 from "./llmtr.js";
-import p160 from "./zcode.js";
-import p161 from "./deepai.js";
+import p159 from "./freellmapi.js";
+import p160 from "./freellmapi-aclide.js";
+import p161 from "./freellmapi-agnes.js";
+import p162 from "./freellmapi-aihorde.js";
+import p163 from "./freellmapi-aion.js";
+import p164 from "./freellmapi-airforce.js";
+import p165 from "./freellmapi-bazaarlink.js";
+import p166 from "./freellmapi-blaze.js";
+import p167 from "./freellmapi-blockrun.js";
+import p168 from "./freellmapi-clod.js";
+import p169 from "./freellmapi-cloudflare.js";
+import p170 from "./freellmapi-cohere.js";
+import p171 from "./freellmapi-dreamprompting.js";
+import p172 from "./freellmapi-electronhub.js";
+import p173 from "./freellmapi-exa.js";
+import p174 from "./freellmapi-firecrawl.js";
+import p175 from "./freellmapi-gizmo.js";
+import p176 from "./freellmapi-google.js";
+import p177 from "./freellmapi-groq.js";
+import p178 from "./freellmapi-kilo.js";
+import p179 from "./freellmapi-linkup.js";
+import p180 from "./freellmapi-llm7.js";
+import p181 from "./freellmapi-llmtr.js";
+import p182 from "./freellmapi-logfare.js";
+import p183 from "./freellmapi-mistral.js";
+import p184 from "./freellmapi-modelscope.js";
+import p185 from "./freellmapi-moondream.js";
+import p186 from "./freellmapi-nara.js";
+import p187 from "./freellmapi-nvidia.js";
+import p188 from "./freellmapi-openrouter.js";
+import p189 from "./freellmapi-ovh.js";
+import p190 from "./freellmapi-pinecone.js";
+import p191 from "./freellmapi-radeon.js";
+import p192 from "./freellmapi-requesty.js";
+import p193 from "./freellmapi-router9.js";
+import p194 from "./freellmapi-routeway.js";
+import p195 from "./freellmapi-sealion.js";
+import p196 from "./freellmapi-septor.js";
+import p197 from "./freellmapi-speechify.js";
+import p198 from "./freellmapi-speka.js";
+import p199 from "./freellmapi-tavily.js";
+import p200 from "./freellmapi-typhoon.js";
+import p201 from "./freellmapi-unorouter.js";
+import p202 from "./freellmapi-waterfall.js";
+import p203 from "./freellmapi-xkiro.js";
+import p204 from "./freellmapi-zhipu.js";
+import p205 from "./zcode.js";
+import p206 from "./deepai.js";
 export default [
   p0,
   p1,
@@ -308,6 +354,52 @@ export default [
   p156,
   p157,
   p158,
+  p159,
   p160,
   p161,
+  p162,
+  p163,
+  p164,
+  p165,
+  p166,
+  p167,
+  p168,
+  p169,
+  p170,
+  p171,
+  p172,
+  p173,
+  p174,
+  p175,
+  p176,
+  p177,
+  p178,
+  p179,
+  p180,
+  p181,
+  p182,
+  p183,
+  p184,
+  p185,
+  p186,
+  p187,
+  p188,
+  p189,
+  p190,
+  p191,
+  p192,
+  p193,
+  p194,
+  p195,
+  p196,
+  p197,
+  p198,
+  p199,
+  p200,
+  p201,
+  p202,
+  p203,
+  p204,
+  p205,
+  p206,
 ];
