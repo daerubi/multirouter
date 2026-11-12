@@ -117,7 +117,6 @@ export async function syncFreeLlmApiCatalog(options = {}) {
 
 // initialize global state
 publishRuntime();
-}
 
 // Initialize from settings if available (best-effort, lazy)
 export async function initFreeLlmApiFromSettings() {
