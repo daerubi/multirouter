@@ -15,7 +15,7 @@ export default {
   alias: "freellmapi",
   display: {
     name: "FreeLLMAPI (Unified)",
-    icon: "api",
+    icon: "hub",
     color: "#2563EB",
     textIcon: "FL",
     website: "https://freellmapi.co",

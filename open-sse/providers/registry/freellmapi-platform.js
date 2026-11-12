@@ -62,6 +62,54 @@ const COMPOUND_AUTH_HINT = {
   cloudflare: "Biasanya butuh format account_id:token (selaras freellmapi).",
 };
 
+const PLATFORM_ICONS = {
+  agnes: { icon: "auto_awesome", color: "#8B5CF6" },
+  aihorde: { icon: "groups", color: "#10B981" },
+  aion: { icon: "hub", color: "#6366F1" },
+  bazaarlink: { icon: "storefront", color: "#F59E0B" },
+  cloudflare: { icon: "cloud", color: "#F38020" },
+  cohere: { icon: "bubble_chart", color: "#39594D" },
+  google: { icon: "travel_explore", color: "#4285F4" },
+  groq: { icon: "bolt", color: "#F55036" },
+  kilo: { icon: "token", color: "#14B8A6" },
+  llm7: { icon: "filter_7", color: "#3B82F6" },
+  mistral: { icon: "air", color: "#FF7000" },
+  modelscope: { icon: "model_training", color: "#624AFF" },
+  nara: { icon: "router", color: "#0EA5E9" },
+  nvidia: { icon: "memory", color: "#76B900" },
+  openrouter: { icon: "alt_route", color: "#6366F1" },
+  ovh: { icon: "dns", color: "#123F6D" },
+  pinecone: { icon: "park", color: "#00A67E" },
+  radeon: { icon: "developer_board", color: "#ED1C24" },
+  requesty: { icon: "send", color: "#EC4899" },
+  routeway: { icon: "fork_right", color: "#22C55E" },
+  sealion: { icon: "sailing", color: "#0EA5E9" },
+  unorouter: { icon: "device_hub", color: "#A855F7" },
+  xkiro: { icon: "flash_on", color: "#F97316" },
+  zhipu: { icon: "psychology", color: "#2563EB" },
+  electronhub: { icon: "hub", color: "#06B6D4" },
+  router9: { icon: "lan", color: "#8B5CF6" },
+  septor: { icon: "shield", color: "#64748B" },
+  clod: { icon: "cloud_queue", color: "#60A5FA" },
+  speechify: { icon: "record_voice_over", color: "#2563EB" },
+  blaze: { icon: "local_fire_department", color: "#EF4444" },
+  airforce: { icon: "flight", color: "#38BDF8" },
+  dreamprompting: { icon: "palette", color: "#D946EF" },
+  waterfall: { icon: "water", color: "#06B6D4" },
+  logfare: { icon: "insights", color: "#22C55E" },
+  aclide: { icon: "terminal", color: "#14B8A6" },
+  moondream: { icon: "nightlight", color: "#6366F1" },
+  speka: { icon: "campaign", color: "#F59E0B" },
+  llmtr: { icon: "translate", color: "#3B82F6" },
+  gizmo: { icon: "precision_manufacturing", color: "#84CC16" },
+  blockrun: { icon: "view_module", color: "#F97316" },
+  typhoon: { icon: "cyclone", color: "#0EA5E9" },
+  tavily: { icon: "travel_explore", color: "#0F766E" },
+  exa: { icon: "search", color: "#1D4ED8" },
+  firecrawl: { icon: "local_fire_department", color: "#FF5A1F" },
+  linkup: { icon: "link", color: "#2563EB" },
+};
+
 function textIcon(name) {
   return String(name || "FL")
     .replace(/[^A-Za-z0-9]/g, " ")
@@ -117,6 +165,7 @@ export function makeFreeLlmApiEntry(platformId) {
   const isKeyless = KEYLESS_PLATFORMS.has(platformId);
   const platformName = FREE_LLM_API_PLATFORM_NAMES[platformId] || platformId;
   const authHint = COMPOUND_AUTH_HINT[platformId];
+  const iconMeta = PLATFORM_ICONS[platformId] || { icon: "api", color: "#2563EB" };
 
   const entry = {
     id: `freellmapi-${platformId}`,
@@ -129,8 +178,8 @@ export function makeFreeLlmApiEntry(platformId) {
     alias: `freellmapi-${platformId}`,
     display: {
       name: `${platformName} (FreeLLMAPI)`,
-      icon: "api",
-      color: "#2563EB",
+      icon: iconMeta.icon || "api",
+      color: iconMeta.color || "#2563EB",
       textIcon: textIcon(platformName),
       website: "https://freellmapi.co/models",
       notice: {
