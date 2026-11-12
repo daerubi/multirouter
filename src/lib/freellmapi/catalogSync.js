@@ -134,7 +134,9 @@ export async function syncFreeLlmApiCatalog(options = {}) {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const payload = await res.json();
-      const catalog = attempt.type === "models" ? toCatalogFromModels(payload) : (catalogFromLatestPayload(payload) || toCatalogFromModels(payload));
+      const catalog = attempt.type === "models"
+        ? toCatalogFromModels(payload)
+        : (catalogFromLatestPayload(payload) || toCatalogFromModels(payload));
       if (!catalog || Object.keys(catalog).length === 0) throw new Error("empty catalog");
       runtimeState.catalog = mergeCatalog(STATIC_CATALOG, catalog);
       runtimeState.lastSyncedAt = new Date().toISOString();
@@ -147,10 +149,19 @@ export async function syncFreeLlmApiCatalog(options = {}) {
     }
   }
 
+  // Fallback: keep bundled static catalog so providers/models remain available
   runtimeState.lastError = lastErr?.message || String(lastErr || "sync failed");
-  if (!runtimeState.catalog) runtimeState.catalog = STATIC_CATALOG;
+  if (!runtimeState.catalog || Object.keys(runtimeState.catalog).length === 0) {
+    runtimeState.catalog = STATIC_CATALOG;
+  }
+  runtimeState.source = runtimeState.source === "live" || runtimeState.source === "public" ? runtimeState.source : "static";
   publishRuntime();
-  return { ok: false, error: runtimeState.lastError, state: getFreeLlmApiSyncState() };
+  return {
+    ok: true,
+    warning: runtimeState.lastError,
+    state: getFreeLlmApiSyncState(),
+    message: "Menggunakan katalog statis (upstream tidak dapat dijangkau/format berbeda). Provider & model tetap terdaftar.",
+  };
 }
 
 // initialize global state
