@@ -12,14 +12,14 @@ let runtimeState = {
 };
 
 function publishRuntime() {
-  try {
-    globalThis.__nineRouterFreeLlmApi = {
-      baseUrl: runtimeState.baseUrl,
-      catalog: runtimeState.catalog,
-      lastSyncedAt: runtimeState.lastSyncedAt,
-      source: runtimeState.source,
-    };
-  } catch {}
+  const state = {
+    baseUrl: runtimeState.baseUrl,
+    catalog: runtimeState.catalog,
+    lastSyncedAt: runtimeState.lastSyncedAt,
+    source: runtimeState.source,
+  };
+  try { globalThis.__nineRouterFreeLlmApi = state; } catch {}
+  try { globalThis.__multirouterFreeLlmApi = state; } catch {}
 }
 
 function normalizeBaseUrl(url) {
@@ -86,33 +86,71 @@ export function getFreeLlmApiSyncState() {
   };
 }
 
+function mergeCatalog(base, overlay) {
+  const out = { ...(base || {}) };
+  for (const [k, v] of Object.entries(overlay || {})) {
+    if (!Array.isArray(v)) continue;
+    out[k] = v;
+  }
+  return out;
+}
+
+function catalogFromLatestPayload(payload) {
+  // Support freellmapi public/latest formats: {catalog:{platform:[models]}}, {platforms:{...}}, or direct map
+  if (!payload || typeof payload !== "object") return null;
+  const c = payload.catalog || payload.platforms || payload.modelsByPlatform || payload;
+  if (!c || typeof c !== "object" || Array.isArray(c)) return null;
+  // if looks like OpenAI models list, use toCatalogFromModels
+  if (Array.isArray(payload.data)) return toCatalogFromModels(payload);
+  const out = {};
+  for (const [platform, models] of Object.entries(c)) {
+    if (!Array.isArray(models)) continue;
+    out[platform] = models.map((m) => {
+      if (typeof m === "string") return { id: m, name: m, kind: inferKind(m) };
+      const id = m.id || m.model || m.name;
+      if (!id) return null;
+      return { id, name: m.name || id, kind: m.kind || m.modality || inferKind(id) };
+    }).filter(Boolean);
+  }
+  return Object.keys(out).length ? out : null;
+}
+
 export async function syncFreeLlmApiCatalog(options = {}) {
   const baseUrl = normalizeBaseUrl(options.baseUrl || runtimeState.baseUrl);
   runtimeState.baseUrl = baseUrl;
-  const url = `${baseUrl}/v1/models`;
-  try {
-    const res = await fetch(url, {
-      method: "GET",
-      headers: { Accept: "application/json" },
-      signal: AbortSignal.timeout(options.timeoutMs || 10000),
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const payload = await res.json();
-    const catalog = toCatalogFromModels(payload);
-    // Merge: keep known static platforms not present in live response, overlay live ones
-    runtimeState.catalog = { ...STATIC_CATALOG, ...catalog };
-    runtimeState.lastSyncedAt = new Date().toISOString();
-    runtimeState.lastError = null;
-    runtimeState.source = "live";
-    publishRuntime();
-    return { ok: true, state: getFreeLlmApiSyncState() };
-  } catch (error) {
-    runtimeState.lastError = error?.message || String(error);
-    // keep existing/static catalog on failure
-    if (!runtimeState.catalog) runtimeState.catalog = STATIC_CATALOG;
-    publishRuntime();
-    return { ok: false, error: runtimeState.lastError, state: getFreeLlmApiSyncState() };
+
+  const attempts = [
+    { type: "models", url: `${baseUrl}/v1/models` },
+    { type: "public", url: "https://api.freellmapi.co/v1/latest" },
+  ];
+
+  let lastErr = null;
+  for (const attempt of attempts) {
+    try {
+      const res = await fetch(attempt.url, {
+        method: "GET",
+        headers: { Accept: "application/json" },
+        signal: AbortSignal.timeout(options.timeoutMs || 10000),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const payload = await res.json();
+      const catalog = attempt.type === "models" ? toCatalogFromModels(payload) : (catalogFromLatestPayload(payload) || toCatalogFromModels(payload));
+      if (!catalog || Object.keys(catalog).length === 0) throw new Error("empty catalog");
+      runtimeState.catalog = mergeCatalog(STATIC_CATALOG, catalog);
+      runtimeState.lastSyncedAt = new Date().toISOString();
+      runtimeState.lastError = null;
+      runtimeState.source = attempt.type === "models" ? "live" : "public";
+      publishRuntime();
+      return { ok: true, state: getFreeLlmApiSyncState(), sourceUrl: attempt.url };
+    } catch (error) {
+      lastErr = error;
+    }
   }
+
+  runtimeState.lastError = lastErr?.message || String(lastErr || "sync failed");
+  if (!runtimeState.catalog) runtimeState.catalog = STATIC_CATALOG;
+  publishRuntime();
+  return { ok: false, error: runtimeState.lastError, state: getFreeLlmApiSyncState() };
 }
 
 // initialize global state

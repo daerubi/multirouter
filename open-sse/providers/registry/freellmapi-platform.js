@@ -1,7 +1,7 @@
 import { FREE_LLM_API_CATALOG as STATIC_CATALOG } from "./freellmapi-catalog.js";
 
 function readRuntime() {
-  const g = globalThis.__nineRouterFreeLlmApi || null;
+  const g = globalThis.__nineRouterFreeLlmApi || globalThis.__multirouterFreeLlmApi || null;
   if (g && typeof g === "object") return g;
   return null;
 }
@@ -39,7 +39,7 @@ export const FREE_LLM_API_PLATFORM_NAMES = {
   blaze: "BlazeAPI",
   airforce: "Api.Airforce",
   dreamprompting: "DreamPrompting",
-  waterfall: "Waterfall",
+  waterfall: "Logfare/Waterfall",
   logfare: "Logfare",
   aclide: "ACLIDE",
   moondream: "Moondream",
@@ -52,6 +52,14 @@ export const FREE_LLM_API_PLATFORM_NAMES = {
   exa: "Exa",
   firecrawl: "Firecrawl",
   linkup: "Linkup",
+};
+
+// Platforms known to be keyless/anonymous in freellmapi upstream catalog semantics
+const KEYLESS_PLATFORMS = new Set(["aihorde", "kilo", "ovh"]);
+
+// Platforms that may require compound/special credentials (metadata hint)
+const COMPOUND_AUTH_HINT = {
+  cloudflare: "Biasanya butuh format account_id:token (selaras freellmapi).",
 };
 
 function textIcon(name) {
@@ -106,24 +114,30 @@ export function makeFreeLlmApiEntry(platformId) {
     if (kindSet.has(kind)) serviceKinds.push(kind);
   }
 
+  const isKeyless = KEYLESS_PLATFORMS.has(platformId);
+  const platformName = FREE_LLM_API_PLATFORM_NAMES[platformId] || platformId;
+  const authHint = COMPOUND_AUTH_HINT[platformId];
+
   const entry = {
     id: `freellmapi-${platformId}`,
     category: "freeTier",
     hasFree: true,
-    authType: "apikey",
-    authModes: ["apikey"],
-    noAuth: false,
+    authType: isKeyless ? "none" : "apikey",
+    authModes: isKeyless ? ["none", "apikey"] : ["apikey"],
+    noAuth: isKeyless,
     priority: 65,
     alias: `freellmapi-${platformId}`,
     display: {
-      name: `${FREE_LLM_API_PLATFORM_NAMES[platformId] || platformId} (FreeLLMAPI)`,
+      name: `${platformName} (FreeLLMAPI)`,
       icon: "api",
       color: "#2563EB",
-      textIcon: textIcon(FREE_LLM_API_PLATFORM_NAMES[platformId] || platformId),
+      textIcon: textIcon(platformName),
       website: "https://freellmapi.co/models",
       notice: {
-        text: "Free tier routed through your FreeLLMAPI instance. Use the unified API key from the FreeLLMAPI Keys page.",
-        apiKeyUrl: mediaBase(baseUrl, "/keys"),
+        text: isKeyless
+          ? `Provider ${platformName} dari katalog FreeLLMAPI (keyless bila didukung). Terdaftar native di multirouter; gunakan instance FreeLLMAPI (${baseUrl}) sebagai gateway jika diperlukan.`
+          : `Provider ${platformName} dari katalog FreeLLMAPI, terdaftar native di multirouter (metode/auth mengikuti upstream).${authHint ? " " + authHint : ""} Gateway opsional: ${baseUrl}.`,
+        apiKeyUrl: "https://freellmapi.co/keys",
       },
     },
     transport: {

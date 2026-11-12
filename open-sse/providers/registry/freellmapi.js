@@ -1,24 +1,35 @@
+function readRuntime() {
+  const g = globalThis.__multirouterFreeLlmApi || globalThis.__nineRouterFreeLlmApi || null;
+  return (g && typeof g === "object") ? g : null;
+}
+function base() {
+  const rt = readRuntime();
+  return String(rt?.baseUrl || "http://localhost:3001").replace(/\/+$/, "");
+}
+function u(path) { return `${base()}${path}`; }
+
 export default {
   id: "freellmapi",
   priority: 15,
   hasFree: true,
   alias: "freellmapi",
   display: {
-    name: "FreeLLMAPI",
+    name: "FreeLLMAPI (Unified)",
     icon: "api",
     color: "#2563EB",
     textIcon: "FL",
     website: "https://freellmapi.co",
     notice: {
-      text: "FreeLLMAPI unified endpoint for the free model catalog routed through your local proxy.",
-      apiKeyUrl: "http://localhost:3001/keys",
+      text: "Gateway FreeLLMAPI terintegrasi di multirouter (semua provider/katalog freellmapi). Set base URL & sync katalog; jika instance lokal/remote tidak aktif, model tetap terdaftar dari katalog snapshot.",
+      apiKeyUrl: "https://freellmapi.co/keys",
     },
   },
   category: "freeTier",
   authType: "apikey",
-  authModes: ["apikey"],
+  authModes: ["apikey", "none"],
+  noAuth: false,
   transport: {
-    baseUrl: "http://localhost:3001/v1/chat/completions",
+    baseUrl: u("/v1/chat/completions"),
     thinkingFormat: "openai",
   },
   models: [
@@ -31,28 +42,11 @@ export default {
     { id: "fusion", name: "Fusion (Multi-model Synthesis)" },
   ],
   serviceKinds: ["llm", "embedding", "image", "tts", "stt", "video"],
-  ttsConfig: {
-    baseUrl: "http://localhost:3001/v1/audio/speech",
-    authType: "apikey",
-    authHeader: "bearer",
-    format: "openai",
-    defaultModel: "auto",
-  },
-  sttConfig: {
-    baseUrl: "http://localhost:3001/v1/audio/transcriptions",
-    authType: "apikey",
-    authHeader: "bearer",
-    format: "openai",
-    defaultModel: "auto",
-  },
-  embeddingConfig: {
-    baseUrl: "http://localhost:3001/v1/embeddings",
-    authType: "apikey",
-    authHeader: "bearer",
-    defaultModel: "auto",
-  },
-  imageConfig: { baseUrl: "http://localhost:3001/v1/images/generations" },
-  videoConfig: { baseUrl: "http://localhost:3001/v1/videos" },
-  modelsFetcher: { url: "http://localhost:3001/v1/models", type: "openai" },
+  ttsConfig: { baseUrl: u("/v1/audio/speech"), authType: "apikey", authHeader: "bearer", format: "openai", defaultModel: "auto" },
+  sttConfig: { baseUrl: u("/v1/audio/transcriptions"), authType: "apikey", authHeader: "bearer", format: "openai", defaultModel: "auto" },
+  embeddingConfig: { baseUrl: u("/v1/embeddings"), authType: "apikey", authHeader: "bearer", defaultModel: "auto" },
+  imageConfig: { baseUrl: u("/v1/images/generations") },
+  videoConfig: { baseUrl: u("/v1/videos") },
+  modelsFetcher: { url: u("/v1/models"), type: "openai" },
   passthroughModels: true,
 };
