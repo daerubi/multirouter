@@ -91,7 +91,7 @@ export function makeFreeLlmApiEntry(platformId) {
   const catalog = resolveCatalog();
   const catalogModels = catalog[platformId] || [];
   // `decision` and `webSearch` are available through the same OpenAI-compatible
-  // router contract, but 9router has no dedicated adapter. Expose them as chat
+  // router contract, but multirouter has no dedicated adapter. Expose them as chat
   // models rather than advertising an unusable media route.
   const models = catalogModels.map((model) => {
     if (model.kind === "systemone" || model.kind === "webSearch") {

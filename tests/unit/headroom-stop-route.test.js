@@ -75,7 +75,7 @@ describe("POST /api/headroom/stop", () => {
     expect(res.status).toBe(400);
     const data = await res.json();
     expect(data.code).toBe("EXTERNAL_PROXY");
-    expect(data.error).toContain("External Headroom proxies must be stopped outside 9Router");
+    expect(data.error).toContain("External Headroom proxies must be stopped outside MultiRouter");
     expect(mocks.stopHeadroomProxy).not.toHaveBeenCalled();
   });
 

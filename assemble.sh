@@ -14,7 +14,7 @@
 # the webpack graph, so those files were missing and AuthGuard answered 503
 # with "guard unavailable". A superset of src/ is what the unit expects.
 set -e
-cd /root/9router
+cd /root/multirouter
 
 if [ ! -f .next/standalone/server.js ]; then
   echo "assemble: .next/standalone/server.js missing - run 'npx next build' first" >&2

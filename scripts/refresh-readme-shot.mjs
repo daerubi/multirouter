@@ -4,7 +4,7 @@ import puppeteer from "puppeteer";
 
 const BASE = process.env.SHOT_BASE || "http://127.0.0.1:20128";
 const PASSWORD = process.env.SHOT_PASSWORD || "";
-const OUT = process.env.SHOT_OUT || "images/9router.png";
+const OUT = process.env.SHOT_OUT || "images/multirouter.png";
 const PATHNAME = process.env.SHOT_PATH || "/dashboard";
 
 if (!PASSWORD) {
@@ -33,8 +33,8 @@ try {
   // The first-login "star on GitHub" dialog is driven by browser storage, so it
   // never appears on a fresh runner profile; belt and braces anyway.
   await page.evaluate(() => {
-    localStorage.setItem("9router:welcomeNeverShow", "true");
-    sessionStorage.removeItem("9router:justLoggedIn");
+    localStorage.setItem("multirouter:welcomeNeverShow", "true");
+    sessionStorage.removeItem("multirouter:justLoggedIn");
   });
   await page.reload({ waitUntil: "networkidle2", timeout: 45000 });
   await page.waitForFunction(() => location.pathname.startsWith("/dashboard"), {

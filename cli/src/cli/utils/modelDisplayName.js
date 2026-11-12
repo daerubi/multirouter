@@ -5,7 +5,7 @@
  * `src/shared/utils/modelDisplayName.js` (ESM, dashboard app), so this file is
  * the CLI's copy of the same rules. Keep the two in sync: the dashboard and the
  * CLI must write identical model names into a client's config, otherwise
- * `9router connect` and the dashboard's "Apply" produce different files.
+ * `multirouter connect` and the dashboard's "Apply" produce different files.
  *
  *   modelDisplayName("claude-opus-5-5")  -> "Claude Opus 5.5"
  *   modelDisplayName("gpt-6.1-sol")      -> "GPT-6.1 Sol"

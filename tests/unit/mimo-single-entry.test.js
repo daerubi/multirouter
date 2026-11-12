@@ -1,7 +1,7 @@
 /**
  * One MiMo free channel, one registry entry.
  *
- * Xiaomi's free MiMo service has one anonymous endpoint, and 9router now
+ * Xiaomi's free MiMo service has one anonymous endpoint, and multirouter now
  * serves it as `mimocode`. Two entries pointing at it (`mimo-free`/mmf plus
  * `mimocode`) published the same mimo-auto model twice and put a near-duplicate
  * label ("MiMo Code Free" beside "MiMoCode Free") in the usage provider

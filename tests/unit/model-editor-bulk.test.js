@@ -10,7 +10,7 @@ let tempDir;
 const originalDataDir = process.env.DATA_DIR;
 
 beforeEach(() => {
-  tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "9router-model-bulk-"));
+  tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "multirouter-model-bulk-"));
   process.env.DATA_DIR = tempDir;
   delete global._dbAdapter;
   vi.resetModules();

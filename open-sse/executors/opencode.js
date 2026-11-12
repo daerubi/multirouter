@@ -39,7 +39,7 @@ import {
 // Shape as of the 1.19.x CLI (reverse-engineered 2026-10-23 via mitmproxy):
 // "opencode/<version> ai-sdk/provider-utils/<v> runtime/bun/<v>" with
 // x-opencode-client: cli, x-opencode-project, and a per-message
-// x-opencode-request: msg_<...>. The 9router executor must keep mirroring
+// x-opencode-request: msg_<...>. The multirouter executor must keep mirroring
 // whatever the current CLI sends: a stale UA is how the free tier tells a
 // relay apart from the real client (upstream #5107).
 const OPENCODE_UA = "opencode/1.19.4 ai-sdk/provider-utils/4.0.23 runtime/bun/1.4.4";

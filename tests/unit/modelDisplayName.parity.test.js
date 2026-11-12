@@ -1,7 +1,7 @@
 /**
  * The dashboard helper (ESM) and the standalone CLI helper (CJS) are two copies
  * of the same rules — the CLI package cannot import from `src/`. This test
- * guards the drift the file comments warn about: `9router connect` and the
+ * guards the drift the file comments warn about: `multirouter connect` and the
  * dashboard's "Apply" must write identical names into a client's config.
  */
 import { createRequire } from "node:module";
@@ -14,7 +14,7 @@ import {
 const require = createRequire(import.meta.url);
 const cli = require("../../cli/src/cli/utils/modelDisplayName.js");
 
-/** Ids shaped like the ones 9router routes: combo aliases, provider-prefixed slugs, custom models. */
+/** Ids shaped like the ones multirouter routes: combo aliases, provider-prefixed slugs, custom models. */
 const IDS = [
   // combo aliases (no provider prefix)
   "claude-opus-5-5",

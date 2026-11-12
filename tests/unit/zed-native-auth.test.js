@@ -1,6 +1,6 @@
 // Acceptance suite for the Zed native-app auth fix.
 // Self-isolating: DATA_DIR points at a temp dir before the DB layer loads,
-// so criterion 3's connection save never reaches the real ~/.9router DB.
+// so criterion 3's connection save never reaches the real ~/.multirouter DB.
 //
 // Covers criteria:
 //   1. Zed proxy starts
@@ -27,7 +27,7 @@ let startZedProxy, stopZedProxy, registerZedSession, getZedSessionStatus, clearZ
 let generateAuthData, exchangeTokens;
 
 beforeAll(async () => {
-  process.env.DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "9router-zed-auth-"));
+  process.env.DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "multirouter-zed-auth-"));
   vi.resetModules();
   ({ startZedProxy, stopZedProxy, registerZedSession, getZedSessionStatus, clearZedSession } =
     await import("@/lib/oauth/utils/server.js"));

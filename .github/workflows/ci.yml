@@ -114,7 +114,7 @@ jobs:
           set -eu
           export PORT=20128
           export HOSTNAME=127.0.0.1
-          export DATA_DIR="$RUNNER_TEMP/9router-data"
+          export DATA_DIR="$RUNNER_TEMP/multirouter-data"
           export JWT_SECRET=ci-jwt-secret
           export INITIAL_PASSWORD=ci-dashboard-password
           export API_KEY_SECRET=ci-api-key-secret
@@ -146,13 +146,13 @@ jobs:
           test "$login_code" != "503"
 
       - name: Pack the standalone bundle
-        run: tar -czf "$RUNNER_TEMP/9router-standalone.tar.gz" -C .next/standalone .
+        run: tar -czf "$RUNNER_TEMP/multirouter-standalone.tar.gz" -C .next/standalone .
 
       - name: Upload the standalone bundle
         uses: actions/upload-artifact@v4
         with:
-          name: 9router-standalone
-          path: ${{ runner.temp }}/9router-standalone.tar.gz
+          name: multirouter-standalone
+          path: ${{ runner.temp }}/multirouter-standalone.tar.gz
           retention-days: 14
 
   image:

@@ -9,7 +9,7 @@ function getStatus(status, tool) {
   if (tool?.configType === "guide") return { label: "Guide", dot: "bg-info", cls: "bg-info/10 text-info border-info/20" };
   if (!status) return { label: "Unknown", dot: "bg-text-muted/50", cls: "bg-surface-3 text-text-muted border-border-subtle" };
   if (!status.installed) return { label: "Not installed", dot: "bg-text-muted/50", cls: "bg-surface-3 text-text-muted border-border-subtle" };
-  if (status.has9Router) return { label: "Connected", dot: "bg-success", cls: "bg-success/10 text-success border-success/20" };
+  if (status.hasMultiRouter) return { label: "Connected", dot: "bg-success", cls: "bg-success/10 text-success border-success/20" };
   return { label: "Not configured", dot: "bg-warning", cls: "bg-warning/10 text-warning border-warning/20" };
 }
 

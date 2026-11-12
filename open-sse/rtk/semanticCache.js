@@ -1,5 +1,5 @@
 /**
- * Semantic / Exact Prompt Caching Helper for 9Router
+ * Semantic / Exact Prompt Caching Helper for MultiRouter
  * Caches and returns responses for exact duplicate non-streaming prompt requests.
  */
 

@@ -25,7 +25,7 @@ const SSO_UA = "MiClaw/1.0";
 const BROWSER_UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
-// Paths that belong to the 9router app itself - never proxy these upstream,
+// Paths that belong to the multirouter app itself - never proxy these upstream,
 // even while a login session is active. Everything else is fair game: the
 // login SPA hits evolving endpoints (/pass2/config, /v3/...), so a static
 // allowlist rots fast. (Edge-safe: plain strings only.)
@@ -535,7 +535,7 @@ function browserCookieHeader(req) {
 const STRIP_UPSTREAM_HEADERS = new Set([
   "host", "cookie", "connection", "content-length", "transfer-encoding",
   "keep-alive", "upgrade", "expect", "proxy-connection",
-  // Credentials for 9router itself - must never reach a third-party upstream.
+  // Credentials for multirouter itself - must never reach a third-party upstream.
   "authorization", "proxy-authorization",
 ]);
 
@@ -718,7 +718,7 @@ h1{font-size:1.1rem;margin:.2rem 0 .6rem}p{opacity:.8;font-size:.9rem;line-heigh
 
 function donePage() {
   const check = '<div class="chk"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>';
-  return htmlPage("登录成功", ["账号会话已捕获，可以关闭此窗口。", "回到 9router 弹窗继续。"], true, check);
+  return htmlPage("登录成功", ["账号会话已捕获，可以关闭此窗口。", "回到 multirouter 弹窗继续。"], true, check);
 }
 
 function pendingPage() {

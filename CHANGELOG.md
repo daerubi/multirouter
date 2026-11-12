@@ -305,16 +305,16 @@
 
 # v0.5.372 (2026-11-06) · 1 commit
 
-## 9router sidebar logo — replaced with the new brand mark
-- Swapped the sidebar logo asset to the updated 9router mark the user provided
-  (`public/providers/9router-logo.png`), replacing the earlier 4 MB image with a
+## multirouter sidebar logo — replaced with the new brand mark
+- Swapped the sidebar logo asset to the updated multirouter mark the user provided
+  (`public/providers/multirouter-logo.png`), replacing the earlier 4 MB image with a
   295 KB square glyph. Renders transparent at 36×36 in the sidebar header.
 
 # v0.5.371 (2026-11-06) · 1 commit
 
-## Provider logos — transparent backgrounds, uniform size, 9router + LLMTR marks
-- **9router sidebar logo**: replaced the gradient `hub` icon tile with the
-  official 9router brand mark (`public/providers/9router-logo.png`) the user
+## Provider logos — transparent backgrounds, uniform size, multirouter + LLMTR marks
+- **multirouter sidebar logo**: replaced the gradient `hub` icon tile with the
+  official multirouter brand mark (`public/providers/multirouter-logo.png`) the user
   provided — rendered transparent in the sidebar header.
 - **Stripped baked backgrounds** from 21 provider logos that shipped with opaque
   white/coloured boxes (`droid`, `roo`, `kiro`, `forge`, `openclaw`, `oai-cc`,
@@ -383,7 +383,7 @@
   fallback.
 - **Kimi Code setup in CLI Tools**: added a `kimi-code` guide card to the CLI
   Tools dashboard — install (`curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash`
-  or `npm install -g @moonshot-ai/kimi-code`), 9Router base URL + API key, model
+  or `npm install -g @moonshot-ai/kimi-code`), MultiRouter base URL + API key, model
   picker, and a ready-to-paste `~/.kimi-code/config.toml` provider+models block
   (OpenAI-compatible type).
 
@@ -1000,7 +1000,7 @@ executor era's contract, so they failed against the current split.
 
 - **Clean Up Theme Inconsistencies Across All Dashboard Pages:**
   - Audited and replaced rogue ad-hoc utility classes (`bg-black/5 dark:bg-white/5`, `bg-gray-500/10`, `text-zinc-*`, hardcoded `text-white` overlays) with system tokens (`bg-surface-2`, `border-border-subtle`, `text-text-main`, `text-text-muted`) across Endpoint, Basic Chat, Arena, CLI Tools, Profile, Error Log, and Console Log pages.
-  - Aligned chip borders, command code blocks, tooltips, and terminal viewer surfaces with the 9Router glassmorphism dark palette.
+  - Aligned chip borders, command code blocks, tooltips, and terminal viewer surfaces with the MultiRouter glassmorphism dark palette.
 
 ---
 
@@ -1123,7 +1123,7 @@ executor era's contract, so they failed against the current split.
 ## What Was Changed
 
 - **Windows CLI Binary Resolution & Process Spawn Fix:**
-  - Fixed Windows `spawn ENOENT` when launching `opencode` on Windows hosts (e.g. `G:\9router
+  - Fixed Windows `spawn ENOENT` when launching `opencode` on Windows hosts (e.g. `G:\multirouter
 ode_modules\.bin\opencode`).
   - Prioritized Windows executable extensions (`.cmd`, `.exe`, `.bat`) over extensionless shell scripts in `findOpencodeBinary`.
   - Added `shell: true` and `windowsHide: true` to `child_process.spawn` options on Windows so batch scripts execute seamlessly.
@@ -1146,7 +1146,7 @@ ode_modules\.bin\opencode`).
 
 - **OpenCode CLI Binary Detection & 'Need Configuration' Status:**
   - Added real-time binary detection for OpenCode CLI across host PATH, global bin, and local node_modules.
-  - When the OpenCode binary is not installed on the host running 9Router seren, OpenCode Free V2 displays a 'Need Configuration' warning badge and instructs the user to install the binary manually (`npm install -g opencode-ai` or curl script).
+  - When the OpenCode binary is not installed on the host running MultiRouter seren, OpenCode Free V2 displays a 'Need Configuration' warning badge and instructs the user to install the binary manually (`npm install -g opencode-ai` or curl script).
 
 ---
 
@@ -1227,7 +1227,7 @@ ode_modules\.bin\opencode`).
 
 - **Live Console Layout Harmonization:**
   - Redesigned the Live Console tab to perfectly mirror the Error Records architectural layout.
-  - Implemented 4 summary metric cards (Total Lines, Errors, Warnings, Stream Status), unified 9Router search input, level segmented control, auto-scroll/copy/clear controls, and structured card list with category badges, line headers, and per-item copy actions.
+  - Implemented 4 summary metric cards (Total Lines, Errors, Warnings, Stream Status), unified MultiRouter search input, level segmented control, auto-scroll/copy/clear controls, and structured card list with category badges, line headers, and per-item copy actions.
 
 ---
 
@@ -1236,7 +1236,7 @@ ode_modules\.bin\opencode`).
 ## What Was Changed
 
 - **Search Bar Redesign & Anti-Slop Cleanup:**
-  - Standardized search bars across both Error Records and Live Console tabs using 9Router's native search input styling (`rounded-[10px]`, integrated search glyph, clear button, and brand focus ring).
+  - Standardized search bars across both Error Records and Live Console tabs using MultiRouter's native search input styling (`rounded-[10px]`, integrated search glyph, clear button, and brand focus ring).
   - Stripped all theatrical AI-slop artifacts from the console view (removed fake macOS red/yellow/green window dots, fake prompt lines, pulsing block cursors, and redundant card wrappers).
   - Streamlined log lines into a clean, flat developer output stream with high-contrast readable typography and simple empty states.
 
@@ -1258,9 +1258,9 @@ ode_modules\.bin\opencode`).
 ## What Was Changed
 
 - **Restored Global Theme Background & Glass Depth:**
-  - Fully restored the ambient glass theme background styling in `.dark.glass` so all pages maintain their luminous depth and signature aesthetic across the entire 9Router dashboard.
+  - Fully restored the ambient glass theme background styling in `.dark.glass` so all pages maintain their luminous depth and signature aesthetic across the entire MultiRouter dashboard.
 - **Complete Design System & Theme Synchronization in Error & Console Logs:**
-  - Refactored `LogsClient` to natively utilize 9Router's official component primitives: `SegmentedControl` with sliding pill indicators for both view tabs and status filters, `Card` with standard elevation and glass styling, `Badge` semantic color variants, and theme-synchronized primary accents (`text-primary`, `bg-brand-500/10`).
+  - Refactored `LogsClient` to natively utilize MultiRouter's official component primitives: `SegmentedControl` with sliding pill indicators for both view tabs and status filters, `Card` with standard elevation and glass styling, `Badge` semantic color variants, and theme-synchronized primary accents (`text-primary`, `bg-brand-500/10`).
 
 ---
 
@@ -1352,7 +1352,7 @@ ode_modules\.bin\opencode`).
 - **Provider Models Isolation across All Providers:** In all provider detail pages, built-in catalog models now start un-hoisted in the "Suggested models" / "Suggested free models" lists and only rise to the active models section when explicitly clicked with `(+)`.
 - **Custom Model Studio Multipliers:** Added dedicated Input Multiplier and Output Multiplier fields to the Custom Model Studio form and displayed active multiplier tags on the custom model cards.
 - **Error Log System:** Added an **Error Log** page (`/dashboard/error-log`) under Console Log in the sidebar navigation with real-time logging, stack trace viewing, filtering, single/bulk copying, and deletion.
-- **Experiment Features (Hide Error):** Introduced the **Experiment Features** page (`/dashboard/experiments`) under 9Router Settings with an experimental "Hide Error" toggle that masks sensitive provider errors into `"There is an error but this error is hidden, try checking your error log."` while logging true errors to the Error Log.
+- **Experiment Features (Hide Error):** Introduced the **Experiment Features** page (`/dashboard/experiments`) under MultiRouter Settings with an experimental "Hide Error" toggle that masks sensitive provider errors into `"There is an error but this error is hidden, try checking your error log."` while logging true errors to the Error Log.
 - **API Key Expiration Visibility:** Added expiration date countdown and status badges to API key rows in Endpoint & Keys as well as in the Key Quota card on the dashboard.
 
 ---
@@ -1495,7 +1495,7 @@ ode_modules\.bin\opencode`).
 
 ## What Was Fixed
 
-- **The executor now mirrors the real OpenCode 1.19.4 CLI fingerprint, and the fallback loop stops at the caller's deadline.** Reverse-engineering the current CLI via mitmproxy showed it sends `User-Agent: opencode/1.19.4 ai-sdk/provider-utils/4.0.23 runtime/bun/1.4.4` with `x-opencode-client: cli`, `x-opencode-project` and a per-message `x-opencode-request` — while 9router still sent the older `opencode/latest/2.0.26/cli` shape, which the free tier reads as a stale relay UA after the upstream update. The executor default, the downstream-UA passthrough check, the registry UAs and the test probe all use the current CLI shape now. Separately, the session-rotation branch never carried the fallback deadline, so an exhausted evening rotated ~1.500 proxies past the 120s probe budget and the dashboard showed "The operation was aborted due to timeout" with no usable error; the session branch now returns the last upstream error once the budget is spent. `tests/unit/opencode-session.test.js` pins the UA default/replacement/passthrough; 37 passed across 4 suites.
+- **The executor now mirrors the real OpenCode 1.19.4 CLI fingerprint, and the fallback loop stops at the caller's deadline.** Reverse-engineering the current CLI via mitmproxy showed it sends `User-Agent: opencode/1.19.4 ai-sdk/provider-utils/4.0.23 runtime/bun/1.4.4` with `x-opencode-client: cli`, `x-opencode-project` and a per-message `x-opencode-request` — while multirouter still sent the older `opencode/latest/2.0.26/cli` shape, which the free tier reads as a stale relay UA after the upstream update. The executor default, the downstream-UA passthrough check, the registry UAs and the test probe all use the current CLI shape now. Separately, the session-rotation branch never carried the fallback deadline, so an exhausted evening rotated ~1.500 proxies past the 120s probe budget and the dashboard showed "The operation was aborted due to timeout" with no usable error; the session branch now returns the last upstream error once the budget is spent. `tests/unit/opencode-session.test.js` pins the UA default/replacement/passthrough; 37 passed across 4 suites.
 
 ---
 
@@ -1822,7 +1822,7 @@ ode_modules\.bin\opencode`).
 
 ## What Was Added
 
-- **CI builds, tests, and boots the standalone server on GitHub Actions**: `next build` does not fit in the development box's memory cap, where the peak already sits next to the limit, so every build now runs on a runner instead. `.github/workflows/ci.yml` installs the root and `tests/` dependencies (no lockfile is tracked, so `npm install` rather than `npm ci`), runs vitest, then builds and checks the standalone tree for the modules `custom-server.js` loads by absolute path (`src/dashboardGuard.js`, `src/lib/db/repos/securityLogRepo.js`, `scripts/auth-guard-hooks.mjs`). It then boots the standalone server against a temporary `DATA_DIR` and fails on anything but a `200` from `/api/health`, or on a `503` from `/login` — the guard-unavailable signature. The bundle is uploaded as an artifact, and a `workflow_dispatch` input pushes a `ghcr.io/serenhope/9router` image for hosts that only run Docker.
+- **CI builds, tests, and boots the standalone server on GitHub Actions**: `next build` does not fit in the development box's memory cap, where the peak already sits next to the limit, so every build now runs on a runner instead. `.github/workflows/ci.yml` installs the root and `tests/` dependencies (no lockfile is tracked, so `npm install` rather than `npm ci`), runs vitest, then builds and checks the standalone tree for the modules `custom-server.js` loads by absolute path (`src/dashboardGuard.js`, `src/lib/db/repos/securityLogRepo.js`, `scripts/auth-guard-hooks.mjs`). It then boots the standalone server against a temporary `DATA_DIR` and fails on anything but a `200` from `/api/health`, or on a `503` from `/login` — the guard-unavailable signature. The bundle is uploaded as an artifact, and a `workflow_dispatch` input pushes a `ghcr.io/serenhope/multirouter` image for hosts that only run Docker.
 - **A raw vitest exit code no longer decides the CI verdict**: the suite carries catalogued failures on a clean checkout, so `tests/__baseline__/compare-fails.mjs` compares the JSON report against `tests/__baseline__/known-fails.txt` and fails only on a failure that is not catalogued. A catalogued failure that now passes is reported as stale so the list can be pruned, an entry only counts as stale when its suite actually ran, and a suite that failed to load counts as a failure with no name instead of passing silently. `tests/unit/ci-baseline-compare.test.js` (9 tests) pins the comparison and the workflow wiring.
 
 ---
@@ -1881,7 +1881,7 @@ ode_modules\.bin\opencode`).
 
 - **A flagged proxy egress no longer hard-blocks OpenCode free-tier (#4988 / issue #4983)**: the free-tier gate answers `403 FreeTierError` when the request leaves from an IP it has flagged, but the transport itself succeeded — so the existing proxy-failure fallback never fired and every retry kept leaving through the same flagged pool until a human rebound it. `proxyAwareFetch` now buffers a proxied 403, looks for the `FreeTierError` marker and replays **once** on the direct egress. Non-gate 403s pass through with their original headers, `strictProxy` still never leaves the configured path, a body already consumed by the first attempt surfaces the original 403, and this fork's `getDispatcher` + HTTP 407 proxy-auth detection is preserved underneath.
 - **Quota check for OpenAI/Anthropic compatible providers (#4999)**: a `Quota check` toggle plus a quota path field on both compatible-node modals. When enabled, `/api/usage/[connectionId]` merges the node's `baseUrl`/`quotaPath`/`nodeName` and a new `customCredits` handler reads the standard credits endpoint, so the remaining balance appears on the Quota page. Opt-in: existing compatible nodes keep `quotaEnabled: false` and behave exactly as before. This fork's `logo`/`brand` node fields and its duplicate-name/prefix guard are preserved.
-- **Human-readable model display names (#4989)**: routed slugs (`claude-opus-5-5`, `oc/space-bunny-free`, `cmc/z-ai/glm-5.3-flash`) now publish a readable `name` from `/v1/models`, `/v1beta/models` and `/api/models`, and the CLI writers (`9router connect`, cli-tools settings) write that name into client configs. An operator-set name is never rewritten; ids are untouched and `name` is purely additive. This fork's operator `owned_by` label is preserved on both custom-model paths.
+- **Human-readable model display names (#4989)**: routed slugs (`claude-opus-5-5`, `oc/space-bunny-free`, `cmc/z-ai/glm-5.3-flash`) now publish a readable `name` from `/v1/models`, `/v1beta/models` and `/api/models`, and the CLI writers (`multirouter connect`, cli-tools settings) write that name into client configs. An operator-set name is never rewritten; ids are untouched and `name` is purely additive. This fork's operator `owned_by` label is preserved on both custom-model paths.
 
 # v0.5.217 (2026-10-18) · 3 commits
 
@@ -2208,7 +2208,7 @@ ode_modules\.bin\opencode`).
 - **Quota auto-ping** runs on a single unified mode selector and defaults to local time, with DST-aware conversion and an anchored schedule at fixed local times (#4848) -Custom
 - **Model picker** gained regex and negation search, batch select, provider filtering and wildcard patterns -Custom
 - **Kiro** wires the AWS Identity Center device flow into provider OAuth (#587) -Custom
-- **Hermes audio transcription** is available as a CLI tool through 9Router (#4763) -Custom
+- **Hermes audio transcription** is available as a CLI tool through MultiRouter (#4763) -Custom
 - **Antigravity** IDE version bumped to 2.22.0 -Custom
 - **Cursor Auto (Server Picks)** resolves to the account's default agent model instead of failing (#4692) -Custom
 - **Qoder** add-on (free-credit promo) quota appears in the quota tracker, with a "See details" pointer when the API exposes no reset date (#4758) -Custom
@@ -2297,7 +2297,7 @@ The following upstream commits in the v0.5.104 range were deliberately not porte
 # v0.5.178 (2026-10-14) · 1 commit
 
 ## What Was Fixed
-- **OpenCode Free big-pickle removed & forced Bearer public**: big-pickle was retired from OpenCode free tier and returned 403 FreeTierError during provider tests. Dropped big-pickle from free model filters and ensured upstream Authorization header always uses "Bearer public" without leaking 9router user API keys -Custom
+- **OpenCode Free big-pickle removed & forced Bearer public**: big-pickle was retired from OpenCode free tier and returned 403 FreeTierError during provider tests. Dropped big-pickle from free model filters and ensured upstream Authorization header always uses "Bearer public" without leaking multirouter user API keys -Custom
 
 # v0.5.177 (2026-10-14) · 1 commit
 
@@ -2679,7 +2679,7 @@ The following upstream commits in the v0.5.104 range were deliberately not porte
 - **Providers**: add v1m System One provider
 - **Agnes**: seed the 2.5/3.0 model ids in the registry
 - **Claude**: add Claude Sonnet 5.5
-- **CLI**: add connect command for remote 9router servers
+- **CLI**: add connect command for remote multirouter servers
 - **Codebuddy**: parse 6004 rate limit error and extract resetsAtMs
 - **Codex**: add GPT-6.1 Sol
 - **Codex**: expose 1M context variants for GPT-6 and GPT-5.6
@@ -2853,7 +2853,7 @@ The following upstream commits in the v0.5.104 range were deliberately not porte
 # v0.5.135-Custom (2026-09-28)
 
 ## What Was Fixed
-- **The wrong panel was hidden for API-key sessions.** The provider map is the diagram with 9Router at its centre and every configured provider arranged around it, joined by animated edges. That is infrastructure rather than one key's usage, and it is what now gets replaced with a short muted note. The usage charts, which were hidden instead in `v0.5.129-Custom`, are back for every session. Both chart endpoints were already scoped to the session's allowed models, so what an API-key holder sees is that key's own usage.
+- **The wrong panel was hidden for API-key sessions.** The provider map is the diagram with MultiRouter at its centre and every configured provider arranged around it, joined by animated edges. That is infrastructure rather than one key's usage, and it is what now gets replaced with a short muted note. The usage charts, which were hidden instead in `v0.5.129-Custom`, are back for every session. Both chart endpoints were already scoped to the session's allowed models, so what an API-key holder sees is that key's own usage.
 - **The note no longer leaves most of a row empty.** Recent Requests is pinned to a fixed height and the map used to fill the wide column beside it, so the note and the request list now drop the two-column grid for an API-key session instead of sitting in a 480px cell.
 - **A session that is still being identified no longer flashes the map.** The lookup of `/api/auth/status` and the statistics load run together, and the map area now shows the same spinner the charts used to, so an API-key holder never sees the map appear and then disappear.
 
@@ -3051,10 +3051,10 @@ The following upstream commits in the v0.5.104 range were deliberately not porte
 # v0.5.115-Custom (2026-09-26)
 
 ## Custom Features & Enhancements
-- **304+ Providers Integration**: Merged the massive provider library from ExtremeRouter. Added over 200+ API-key providers, 25 OAuth providers, and 39 Web-cookie providers (including Qwen Web, Claude Web, ChatGPT Web, Grok Web, Notion AI, HyperAgent, Conol, DouBao, Adapta, and more) into 9Router.
+- **304+ Providers Integration**: Merged the massive provider library from ExtremeRouter. Added over 200+ API-key providers, 25 OAuth providers, and 39 Web-cookie providers (including Qwen Web, Claude Web, ChatGPT Web, Grok Web, Notion AI, HyperAgent, Conol, DouBao, Adapta, and more) into MultiRouter.
 - **Provider Capabilities & Prices**: Fully synchronized model metadata, token limits, capabilities, tool-calling flags, and token cost pricing with ExtremeRouter's definitions.
 - **Frontend Modals & UI**: Updated Add API Key modal to automatically suggest specific cookie capturing instructions for new Web-cookie providers. Added `FeloCaptureButton` and `CookieCaptureButton` helper components. 
-- **Preserved 9Router-specific Providers**: Kept exclusive 9Router providers and aliases intact (like OpenCode Zen, CodeBuddy Intl, Qoder CN, Devin CLI, Grok CLI, DeepSeek Web Tool Bridge).
+- **Preserved MultiRouter-specific Providers**: Kept exclusive MultiRouter providers and aliases intact (like OpenCode Zen, CodeBuddy Intl, Qoder CN, Devin CLI, Grok CLI, DeepSeek Web Tool Bridge).
 
 # v0.5.114-Custom (2026-09-25)
 
@@ -3074,13 +3074,13 @@ The following upstream commits in the v0.5.104 range were deliberately not porte
 
 ## Sync with upstream v0.5.86
 - **Merged upstream through v0.5.86 (2026-09-23)**: Xiaomi MiMo server-assisted desktop login with five account clusters and v2.6 models, Claude Opus 5.5 support, and proxy pool header forwarding fix.
-- **Kept fork behaviour**: Union Alpha routing over Messages API, one-click auto backup scheduler, Speed Mode plugin, per-key usage page, plugin badges on Custom Models and combos, 9Router Settings label, and the fork README. The OpenCode free-tier fix is carried by upstream's `opencodeFingerprint` helper, with `union-alpha-free` kept alongside it.
+- **Kept fork behaviour**: Union Alpha routing over Messages API, one-click auto backup scheduler, Speed Mode plugin, per-key usage page, plugin badges on Custom Models and combos, MultiRouter Settings label, and the fork README. The OpenCode free-tier fix is carried by upstream's `opencodeFingerprint` helper, with `union-alpha-free` kept alongside it.
 
 # v0.5.111-Custom (2026-09-22)
 
 ## Sync with upstream v0.5.85
 - **Merged upstream through v0.5.85 (2026-09-22)**: OpenCode Zen provider with free-tier fingerprint, Jev System One endpoint wired into the sidebar and media providers, Qoder CN provider, Cursor/Claude combo presets with bulk operations, analytics Requests mode with provider/model breakdown charts, All Time usage period, capability metadata on `/v1/models`, and all upstream fixes (Claude refusal mapping, Antigravity quotas, Qoder replay guard, Hugging Face router migration, multi-platform Docker).
-- **Kept fork behaviour**: Union Alpha routing over Messages API, one-click auto backup scheduler, Speed Mode plugin, per-key usage page, plugin badges on Custom Models and combos, 9Router Settings label, and the fork README. The OpenCode free-tier fix is now carried by upstream's `opencodeFingerprint` helper instead of the fork's local cloak, with `union-alpha-free` kept alongside it.
+- **Kept fork behaviour**: Union Alpha routing over Messages API, one-click auto backup scheduler, Speed Mode plugin, per-key usage page, plugin badges on Custom Models and combos, MultiRouter Settings label, and the fork README. The OpenCode free-tier fix is now carried by upstream's `opencodeFingerprint` helper instead of the fork's local cloak, with `union-alpha-free` kept alongside it.
 
 # v0.5.110-Custom (2026-09-20)
 
@@ -3102,7 +3102,7 @@ The following upstream commits in the v0.5.104 range were deliberately not porte
 # v0.5.107-Custom (2026-09-20)
 
 ## Custom Features & Enhancements
-- **Automatic Backup restored**: brought back the scheduled backup feature with its full settings dialog on the 9Router Settings page. Configure a Telegram bot (bot token plus numeric owner chat id) or a GitHub token and repository, pick an interval (24 hours, 7 days, 30 days, or custom), then save. The scheduler sends the backup file automatically on the chosen interval, a live countdown shows when the next backup fires, and Send Test Backup runs a one-off backup through the password dialog. The export/import plumbing was re-integrated on top of the current selective backup system: Automatic Backup now exports all sections, and old partial or full backups remain fully import-compatible.
+- **Automatic Backup restored**: brought back the scheduled backup feature with its full settings dialog on the MultiRouter Settings page. Configure a Telegram bot (bot token plus numeric owner chat id) or a GitHub token and repository, pick an interval (24 hours, 7 days, 30 days, or custom), then save. The scheduler sends the backup file automatically on the chosen interval, a live countdown shows when the next backup fires, and Send Test Backup runs a one-off backup through the password dialog. The export/import plumbing was re-integrated on top of the current selective backup system: Automatic Backup now exports all sections, and old partial or full backups remain fully import-compatible.
 
 # v0.5.106-Custom (2026-09-19)
 
@@ -3140,7 +3140,7 @@ The following upstream commits in the v0.5.104 range were deliberately not porte
 # v0.5.100-Custom (2026-09-19)
 
 ## What Was Fixed
-- **Modal header polish**: the "Welcome to 9Router!" title no longer hugs the left edge of the dialog and now sits vertically centered on the same line as the close button. Applied to all dialogs, including the Download Backup header.
+- **Modal header polish**: the "Welcome to MultiRouter!" title no longer hugs the left edge of the dialog and now sits vertically centered on the same line as the close button. Applied to all dialogs, including the Download Backup header.
 - **Smaller "Heavy" badge**: the Heavy tag in the Download Backup section list now renders in the compact badge size instead of falling back to the large default.
 
 # v0.5.99-Custom (2026-09-18)
@@ -3166,7 +3166,7 @@ The following upstream commits in the v0.5.104 range were deliberately not porte
 ## Custom Features & Enhancements
 - **Uncensored Output Plugin Updates**: renamed the third plugin to *Uncensored Output* and updated its icon to an emerald/red key off (`key_off`) badge. Added fallback model matching across requested, routed, and full model identifiers so plugin directives reliably inject into System prompts.
 - **Header "Visit On GitHub" Button**: enhanced the GitHub repository link button in the top right header to display a clear "Visit On GitHub" text label next to the GitHub logo.
-- **Sidebar & UI Polish**: renamed "Custom Models & Editor" to "Custom Models", updated the "Custom Plugins" icon to `widgets`, renamed "Settings" to "9Router Settings", and cleaned up top traffic-light decorative dots.
+- **Sidebar & UI Polish**: renamed "Custom Models & Editor" to "Custom Models", updated the "Custom Plugins" icon to `widgets`, renamed "Settings" to "MultiRouter Settings", and cleaned up top traffic-light decorative dots.
 - **Custom Provider & Studio Target Picker Fix**: custom providers now stay visible in model selectors even when their underlying base models are mapped to studio custom model names. Upgraded logo data URL storage capacity and added JPEG compression fallback so custom provider logos never vanish.
 
 # v0.5.95-Custom (2026-09-17)
@@ -3234,12 +3234,12 @@ The following upstream commits in the v0.5.104 range were deliberately not porte
 # v0.5.87-Custom (2026-09-14)
 
 ## Custom Features & Enhancements
-- **Automatic Backup moved into its own dialog and learned GitHub**: instead of a full card on the settings page, a single **Automatic Backup** button now sits right above Download Backup - it opens a modal where you pick the channel (Telegram bot or GitHub repository with a write-scoped token, committing to `9router-backups/` plus a `latest.json` pointer on a chosen branch), set the interval, then press **Save Configuration** to store everything and arm the schedule in one click; **Send Test Backup** delivers one backup immediately (password-confirmed) so the whole path can be verified on the spot. Both bot and GitHub tokens are now encrypted at rest with a machine-bound key, so no plaintext credential is ever written to the database or echoed back to the browser.
+- **Automatic Backup moved into its own dialog and learned GitHub**: instead of a full card on the settings page, a single **Automatic Backup** button now sits right above Download Backup - it opens a modal where you pick the channel (Telegram bot or GitHub repository with a write-scoped token, committing to `multirouter-backups/` plus a `latest.json` pointer on a chosen branch), set the interval, then press **Save Configuration** to store everything and arm the schedule in one click; **Send Test Backup** delivers one backup immediately (password-confirmed) so the whole path can be verified on the spot. Both bot and GitHub tokens are now encrypted at rest with a machine-bound key, so no plaintext credential is ever written to the database or echoed back to the browser.
 
 # v0.5.86-Custom (2026-09-14)
 
 ## Custom Features & Enhancements
-- **Backups now deliver themselves to Telegram**: a new Auto Backup (Telegram) card sits above Download Backup in the profile page - set a bot token and owner chat id, pick the interval (every 24 hours, 7 days, 30 days, or custom hours), and the scheduler exports the exact same database backup the manual button downloads and sends it to your chat as a `9router-backup-*.json` file, importable with Import Backup unchanged. The token is stored write-only (never echoed back to the browser, kept out of the settings blob), the schedule survives restarts through the persisted last-sent stamp, sends follow the outbound proxy, oversized backups beyond the bot's upload cap are refused with a clear status instead of a silent stall, and a Send Test Backup button (password-confirmed like the other backup actions) verifies the whole path on demand. The configuration also travels inside every backup, so a restored instance resumes sending on its own schedule.
+- **Backups now deliver themselves to Telegram**: a new Auto Backup (Telegram) card sits above Download Backup in the profile page - set a bot token and owner chat id, pick the interval (every 24 hours, 7 days, 30 days, or custom hours), and the scheduler exports the exact same database backup the manual button downloads and sends it to your chat as a `multirouter-backup-*.json` file, importable with Import Backup unchanged. The token is stored write-only (never echoed back to the browser, kept out of the settings blob), the schedule survives restarts through the persisted last-sent stamp, sends follow the outbound proxy, oversized backups beyond the bot's upload cap are refused with a clear status instead of a silent stall, and a Send Test Backup button (password-confirmed like the other backup actions) verifies the whole path on demand. The configuration also travels inside every backup, so a restored instance resumes sending on its own schedule.
 
 # v0.5.85-Custom (2026-09-13)
 
@@ -3666,7 +3666,7 @@ The following upstream commits in the v0.5.104 range were deliberately not porte
   13.0.3 ships per-platform prebuilds, `--ignore-scripts` skips the implicit
   node-gyp build); Node < 22 stays on 12.6.2, working installs untouched
 - **CLI tools**: send the API key Codex actually reads -
-  `[model_providers.9router.http_headers]` instead of auth.json (which left
+  `[model_providers.multirouter.http_headers]` instead of auth.json (which left
   every request 401 and clobbered an existing ChatGPT login); subagent model
   moved to `agents.default_subagent_model`
 - **OAuth**: refresh Cline tokens with the extension JSON contract
@@ -3767,7 +3767,7 @@ The following upstream commits in the v0.5.104 range were deliberately not porte
 ## What's Added?
 - **Providers**: add TokenRouter (300+ models via OpenAI-compatible gateway) with
   exact per-model pricing for 110 models and `reasoning_effort` thinking config
-- **Providers**: add Self-hosted STT / TTS / Embedding - point 9Router at your own
+- **Providers**: add Self-hosted STT / TTS / Embedding - point MultiRouter at your own
   OpenAI-compatible speech and embedding servers (whisper.cpp, faster-whisper,
   Kokoro-FastAPI, llama-server, vLLM, Infinity). Unlike the named cloud providers
   these read `baseUrl` per connection, so one provider can front several machines
@@ -3900,7 +3900,7 @@ The following upstream commits in the v0.5.104 range were deliberately not porte
 - **CLI tools**: Grok Build setup - choose separate main/general-purpose/explore/plan models and preserve each model's context window
 - **GitHub Copilot**: route Claude models through Copilot's native `/v1/messages`
 - **Kiro**: add GPT-5.6 model family (#2596)
-- **RTK**: `X-9Router-Token-Saver` header to bypass token savers per request
+- **RTK**: `X-MultiRouter-Token-Saver` header to bypass token savers per request
 - **Providers**: quota visibility settings
 - **Translator**: drop temperature for all Claude models
 - **i18n**: Thai (th) + Persian (fa) translations / README
@@ -4150,7 +4150,7 @@ The following upstream commits in the v0.5.104 range were deliberately not porte
 - Dashboard: show provider node name instead of connection name in topology (#1770) + show explicit `kind="llm"` combos on combos page (#1684)
 
 ## What's Documented?
-- README: add Indonesian 9Router tutorial video (#1709)
+- README: add Indonesian MultiRouter tutorial video (#1709)
 
 # v0.4.71 (2026-06-06)
 

@@ -1,7 +1,7 @@
 // Update detection for the running install. Two independent signals, because the
 // app is deployed in ways that break one of them:
 //
-//   1. git: how many commits is this checkout behind serenhope/9router master.
+//   1. git: how many commits is this checkout behind serenhope/multirouter master.
 //      Only works when the deploy ships git history.
 //   2. release: the newest version heading in the repository changelog compared
 //      with the version this build was made from. Works everywhere, including
@@ -31,7 +31,7 @@ function githubJson(endpoint) {
     const req = https.get(`${API}${endpoint}`, {
       timeout: 5000,
       headers: {
-        "User-Agent": "9Router-App",
+        "User-Agent": "MultiRouter-App",
         Accept: "application/vnd.github.v3+json",
         ...(process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}),
       },
@@ -68,7 +68,7 @@ function fetchText(url) {
   return new Promise((resolve) => {
     const req = https.get(url, {
       timeout: 5000,
-      headers: { "User-Agent": "9Router-App" },
+      headers: { "User-Agent": "MultiRouter-App" },
     }, (res) => {
       let data = "";
       let size = 0;

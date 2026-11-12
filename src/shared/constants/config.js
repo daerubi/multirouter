@@ -2,35 +2,35 @@ import pkg from "../../../package.json" with { type: "json" };
 
 // App configuration
 export const APP_CONFIG = {
-  name: "9Router Proxy",
+  name: "MultiRouter Proxy",
   description: "AI Infrastructure Management",
   version: pkg.version,
 };
 
 // GitHub configuration
 export const GITHUB_CONFIG = {
-  changelogUrl: "https://raw.githubusercontent.com/serenhope/9router/refs/heads/master/CHANGELOG.md",
-  donateUrl: "https://9router.com/api/donate",
-  repoUrl: "https://github.com/serenhope/9router",
-  apiRepo: "serenhope/9router", // update checks compare the running checkout with this
+  changelogUrl: "https://raw.githubusercontent.com/serenhope/multirouter/refs/heads/master/CHANGELOG.md",
+  donateUrl: "https://multirouter.com/api/donate",
+  repoUrl: "https://github.com/serenhope/multirouter",
+  apiRepo: "serenhope/multirouter", // update checks compare the running checkout with this
   branch: "master",
 };
 
 // Post-login thank-you dialog: shown once per login, skippable forever.
 export const WELCOME_CONFIG = {
-  shownKey: "9router:welcomeAfterLogin",
-  hideKey: "9router:welcomeNeverShow",
+  shownKey: "multirouter:welcomeAfterLogin",
+  hideKey: "multirouter:welcomeNeverShow",
 };
 
 // Updater configuration
 export const UPDATER_CONFIG = {
   // This install is a fork of the upstream npm package: pulling the published
-  // `9router` from npm would hand the operator a different codebase than the one
+  // `multirouter` from npm would hand the operator a different codebase than the one
   // reporting the update, so the command points at this repository instead.
-  npmPackageName: "9router",
-  repoPackageSpec: "github:serenhope/9router",
-  installCmd: "npm install -g github:serenhope/9router",
-  installCmdLatest: "npm install -g github:serenhope/9router@master",
+  npmPackageName: "multirouter",
+  repoPackageSpec: "github:serenhope/multirouter",
+  installCmd: "npm install -g github:serenhope/multirouter",
+  installCmdLatest: "npm install -g github:serenhope/multirouter@master",
   shutdownCountdownSec: 3,
   exitDelayMs: 500,
   statusPort: 20129,

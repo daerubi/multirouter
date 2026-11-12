@@ -26,7 +26,7 @@ export async function POST() {
 
   if (process.env.NODE_ENV !== "production") {
     return NextResponse.json(
-      { success: false, message: "Update is only available in production build (9router CLI)" },
+      { success: false, message: "Update is only available in production build (multirouter CLI)" },
       { status: 403 }
     );
   }

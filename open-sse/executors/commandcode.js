@@ -15,7 +15,7 @@ import { commandCodeThreadId, isCommandCodeThreadId } from "../utils/commandCode
  * Upstream returns AI SDK v5 NDJSON (one JSON event per line, no `data:` prefix).
  * We translate each event to an OpenAI chat.completion.chunk and emit it as SSE so
  * both the streaming and non-streaming (forced SSE → JSON) downstream handlers in
- * 9router can consume it without further format translation.
+ * multirouter can consume it without further format translation.
  */
 export class CommandCodeExecutor extends BaseExecutor {
   constructor() {

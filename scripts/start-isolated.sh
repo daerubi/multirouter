@@ -9,7 +9,7 @@ export NEXT_DIST_DIR=".next-test"
 export NODE_ENV=development
 
 echo "======================================================="
-echo "  9Router (Isolated Dev Instance)"
+echo "  MultiRouter (Isolated Dev Instance)"
 echo "======================================================="
 echo "  Port:      http://127.0.0.1:$PORT"
 echo "  Dashboard: http://127.0.0.1:$PORT/dashboard/prompt-injection"

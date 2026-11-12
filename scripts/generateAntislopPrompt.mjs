@@ -29,7 +29,7 @@ const read = (name) => fs.readFileSync(path.join(SRC_DIR, name), "utf8");
 // note below stands in for the mode section - the plugin's level IS the mode here.
 const CORE_START = "## What This Is";
 
-const MODE_NOTE = `> Runtime note: this text is injected by 9Router's Anti Slop plugin. Ignore the skill's own
+const MODE_NOTE = `> Runtime note: this text is injected by MultiRouter's Anti Slop plugin. Ignore the skill's own
 > install wizard and mode resolution - there is nothing to install, and the intensity is
 > already chosen (${"${level}"}). Do not ask which mode to use; apply the rules and continue.`;
 

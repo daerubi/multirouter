@@ -13,7 +13,7 @@
  */
 import { DatabaseSync } from "node:sqlite";
 
-const DB_PATH = process.env.DATABASE_PATH || "/root/.9router/db/data.sqlite";
+const DB_PATH = process.env.DATABASE_PATH || "/root/.multirouter/db/data.sqlite";
 const AG_BASE = "https://daily-cloudcode-pa.googleapis.com/v1internal";
 const UA = "Antigravity/2.11.0 darwin/24.0.0";
 

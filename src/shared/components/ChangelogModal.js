@@ -9,7 +9,7 @@ import { SERENHOPE_SOURCE, DECOLUA_SOURCE, DEFAULT_CHANGELOG_SOURCE, availableCh
 marked.setOptions({ gfm: true, breaks: true });
 
 const DECOLUA_URL = "https://raw.githubusercontent.com/decolua/9router/refs/heads/master/CHANGELOG.md";
-const SERENHOPE_URL = "https://raw.githubusercontent.com/serenhope/9router/refs/heads/master/CHANGELOG.md";
+const SERENHOPE_URL = "https://raw.githubusercontent.com/serenhope/multirouter/refs/heads/master/CHANGELOG.md";
 const CHANGELOG_API_URL = "/api/changelog";
 
 function asMarkdown(value) {
@@ -235,9 +235,9 @@ const CATEGORY_ALIAS = {
   "cli tools provider logos": "UI",
   "cli tools provider logos - uniform, larger, no background tint": "UI",
   "provider logos": "UI",
-  "provider logos - transparent backgrounds, uniform size, 9router + llmtr marks": "UI",
-  "9router sidebar logo": "UI",
-  "9router sidebar logo - replaced with the new brand mark": "UI",
+  "provider logos - transparent backgrounds, uniform size, multirouter + llmtr marks": "UI",
+  "multirouter sidebar logo": "UI",
+  "multirouter sidebar logo - replaced with the new brand mark": "UI",
   "runcrate": "UI",
   "runcrate - real logo instead of the rc text tile": "UI",
   "cli tools logo tiles": "UI",

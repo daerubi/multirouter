@@ -1,5 +1,5 @@
 /**
- * Context Truncation & Pruning Helper for 9Router
+ * Context Truncation & Pruning Helper for MultiRouter
  * Trims old conversation messages while preserving System prompts and recent turns.
  */
 

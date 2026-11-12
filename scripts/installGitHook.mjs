@@ -30,7 +30,7 @@ import { readFileSync, writeFileSync, existsSync, unlinkSync } from "node:fs";
 
 const PREPARE_HOOK = ".git/hooks/prepare-commit-msg";
 const POST_HOOK = ".git/hooks/post-commit";
-const MARK_START = "# >>> 9Router changelog hook >>>";
+const MARK_START = "# >>> MultiRouter changelog hook >>>";
 
 function isGitRepo() {
   try {

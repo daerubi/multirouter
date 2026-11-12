@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Standalone assembly for 9router, after any build.
+# Standalone assembly for multirouter, after any build.
 #
 # Why this exists: next build's trace output only contains files it could prove
 # are needed. Three of them are loaded by path at RUNTIME, so the trace never sees
@@ -20,7 +20,7 @@
 # same guard in a different way. node_modules is already assembled by next build;
 # only the runtime-loaded top-level files need to be added.
 set -euo pipefail
-cd /root/9router
+cd /root/multirouter
 S=.next/standalone
 
 echo "[assembly] verifying build output"
@@ -61,6 +61,6 @@ for f in scripts/auth-guard-hooks.mjs src/dashboardGuard.js custom-server.js \
 done
 
 echo "[assembly] restarting"
-systemctl restart 9router
+systemctl restart multirouter
 sleep 4
-systemctl is-active 9router
+systemctl is-active multirouter

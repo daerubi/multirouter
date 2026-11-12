@@ -107,7 +107,7 @@ const getPageInfo = (pathname) => {
   if (pathname.includes("/mitm"))
     return {
       title: "MITM Proxy",
-      description: "Intercept CLI tool traffic and route through 9Router",
+      description: "Intercept CLI tool traffic and route through MultiRouter",
       icon: "security",
       breadcrumbs: [],
     };
@@ -149,7 +149,7 @@ const getPageInfo = (pathname) => {
   if (pathname.includes("/profile"))
     return {
       title: "Settings",
-      description: "9Router configuration and preferences",
+      description: "MultiRouter configuration and preferences",
       icon: "settings",
       breadcrumbs: [],
     };
@@ -327,7 +327,7 @@ export default function Header({ onMenuClick, showMenuButton = true }) {
         )}
         <HeaderSearch />
         <a
-          href="https://github.com/serenhope/9router"
+          href="https://github.com/serenhope/multirouter"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-[10px] text-xs font-medium text-text-muted hover:text-text-main hover:bg-surface-2 transition-all border border-border-subtle"

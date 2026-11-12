@@ -118,7 +118,7 @@ export async function handleChatCore({ body, modelInfo, credentials, log, onCred
       return {
         success: true,
       response: new Response(JSON.stringify(cachedResponse), {
-          headers: { "Content-Type": "application/json", "X-9Router-Cache": "HIT" },
+          headers: { "Content-Type": "application/json", "X-MultiRouter-Cache": "HIT" },
         }),
       };
     }

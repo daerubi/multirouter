@@ -191,7 +191,7 @@ export default function Sidebar({ onClose }) {
         <div className="px-6 py-4 flex flex-col gap-2">
           <Link href="/dashboard" className="flex items-center gap-3">
             <div className="flex items-center justify-center size-9 shrink-0 overflow-hidden rounded-[10px]">
-              <Image src="/providers/9router-logo.png" alt={APP_CONFIG.name} width={36} height={36} className="size-full object-contain" sizes="36px" priority unoptimized />
+              <Image src="/providers/multirouter-logo.png" alt={APP_CONFIG.name} width={36} height={36} className="size-full object-contain" sizes="36px" priority unoptimized />
             </div>
             <div className="flex flex-col">
               <h1 className="text-lg font-semibold tracking-tight text-text-main">
@@ -326,7 +326,7 @@ export default function Sidebar({ onClose }) {
               <NavLink
                 href='/dashboard/profile'
                 icon='settings'
-                label='9Router Settings'
+                label='MultiRouter Settings'
                 active={isActive('/dashboard/profile')}
                 onClick={onClose}
               />

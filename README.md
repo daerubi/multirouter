@@ -1,14 +1,14 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=venom&height=200&color=0:f97815,100:c2590a&text=9Router&fontSize=60&fontColor=ffffff&fontAlignY=38&animation=fadeIn" width="100%" alt="9Router" />
+<img src="https://capsule-render.vercel.app/api?type=venom&height=200&color=0:f97815,100:c2590a&text=MultiRouter&fontSize=60&fontColor=ffffff&fontAlignY=38&animation=fadeIn" width="100%" alt="MultiRouter" />
 
 <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=20&duration=3500&pause=1200&color=F97815&center=true&vCenter=true&width=640&height=50&lines=One+gateway%2C+any+model;OpenAI%E2%80%91compatible+endpoint;Speaks+Claude+and+Gemini+too;Extra+features%2C+free+for+everyone" alt="One gateway, any model" />
 
-A fork of [Decolua/9router](https://github.com/Decolua/9router) with extra features for everyone who wants them.
+A fork of [Decolua/multirouter](https://github.com/Decolua/multirouter) with extra features for everyone who wants them.
 
 One gateway, one API key, any model: an OpenAI-compatible endpoint that routes to Claude, GPT, Gemini, Kimi, Qwen, GLM, DeepSeek, Grok and many more, with OAuth or your own accounts. This is still that router, with the parts I use daily changed and the rough edges fixed, free for anyone to use.
 
-![License](https://img.shields.io/badge/license-MIT-green) ![Upstream](https://img.shields.io/badge/upstream-Decolua%2F9router-blue) ![Edition](https://img.shields.io/badge/edition-fork--custom-orange)
+![License](https://img.shields.io/badge/license-MIT-green) ![Upstream](https://img.shields.io/badge/upstream-Decolua%2Fmultirouter-blue) ![Edition](https://img.shields.io/badge/edition-fork--custom-orange)
 
 </div>
 
@@ -18,13 +18,13 @@ One gateway, one API key, any model: an OpenAI-compatible endpoint that routes t
 
 <div align="center">
 
-<img src="images/9router.png" alt="9Router dashboard" width="100%" />
+<img src="images/multirouter.png" alt="MultiRouter dashboard" width="100%" />
 
 </div>
 
 ## Routing & Capabilities
 
-9Router accepts requests in standard client formats (OpenAI Chat Completions, Anthropic Messages, or Gemini generateContent), translates them on-the-fly, and routes them to upstream providers through multiple connection tiers:
+MultiRouter accepts requests in standard client formats (OpenAI Chat Completions, Anthropic Messages, or Gemini generateContent), translates them on-the-fly, and routes them to upstream providers through multiple connection tiers:
 
 - **OAuth & Device Auth** - Connect official account sessions with automatic token refresh.
 - **Direct API Keys** - Standard API key integration for enterprise and public AI cloud providers.
@@ -36,7 +36,7 @@ Beyond text chat, the router natively exposes specialized endpoints for multimod
 
 ## Architecture & Core Design
 
-9Router functions as a unified gateway layer between AI client applications and model providers. It abstracts protocol differences, authentication mechanisms, and request lifecycle management so downstream tools only need to speak one standard interface.
+MultiRouter functions as a unified gateway layer between AI client applications and model providers. It abstracts protocol differences, authentication mechanisms, and request lifecycle management so downstream tools only need to speak one standard interface.
 
 - **Universal Protocol Adapter**: Ingests requests in OpenAI, Anthropic Claude, or Google Gemini format, translates them on-the-fly to the target provider's native schema, and transparently streams standardized responses back.
 - **Unified Credential & Key Management**: Single interface for managing OAuth sessions, direct API keys, reverse-engineered web sessions, and custom local models.
@@ -48,8 +48,8 @@ For granular version updates, newly added providers, and ongoing improvements, r
 ## Getting started
 
 ```bash
-git clone https://github.com/serenhope/9router.git
-cd 9router
+git clone https://github.com/serenhope/multirouter.git
+cd multirouter
 npm install
 npm run dev          # dashboard on http://localhost:20127
 ```
@@ -64,8 +64,8 @@ npm run start
 Docker:
 
 ```bash
-docker build -t 9router-fork .
-docker run -d -p 20128:20128 -v 9router-data:/app/data 9router-fork
+docker build -t multirouter-fork .
+docker run -d -p 20128:20128 -v multirouter-data:/app/data multirouter-fork
 ```
 
 Once it is running:
@@ -91,11 +91,11 @@ Point any CLI tool or agent at the base URL, generate a key under **Endpoint & K
 
 ## Configuration
 
-The app reads a few environment variables with sensible defaults; see [.env.example](./.env.example). State lives in `~/.9router` (SQLite database, backups, secrets).
+The app reads a few environment variables with sensible defaults; see [.env.example](./.env.example). State lives in `~/.multirouter` (SQLite database, backups, secrets).
 
 ## Credits
 
-- Built on **[Decolua/9router](https://github.com/Decolua/9router)** - full credit to upstream for the router, the providers and the translators.
+- Built on **[Decolua/multirouter](https://github.com/Decolua/multirouter)** - full credit to upstream for the router, the providers and the translators.
 - Fork releases are tagged in [CHANGELOG.md](./CHANGELOG.md).
 - License: **MIT**, same as upstream. See [LICENSE](./LICENSE).
 
@@ -105,7 +105,7 @@ The app reads a few environment variables with sensible defaults; see [.env.exam
 
 If this fork helped you, a star is appreciated.
 
-[![Stars](https://img.shields.io/github/stars/serenhope/9router?style=social)](https://github.com/serenhope/9router/stargazers)
+[![Stars](https://img.shields.io/github/stars/serenhope/multirouter?style=social)](https://github.com/serenhope/multirouter/stargazers)
 
 </div>
 
