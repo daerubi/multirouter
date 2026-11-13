@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { getProviderConnections, updateProviderConnection } from "@/lib/db/index.js";
 import { rotateConnections } from "@/lib/farming/accountManager.js";
 import { syncFreeLlmApiCatalog, getFreeLlmApiSyncState } from "@/lib/freellmapi/catalogSync.js";
+import { recheckProviderModels } from "@/lib/models/modelRechecker.js";
+import { generateAutoCombos } from "@/lib/combos/autoCombo.js";
 
 export const dynamic = "force-dynamic";
 
@@ -77,12 +79,12 @@ async function runCycle(options = {}) {
   g.status = "running";
   g.lastRunAt = new Date().toISOString();
   log("Account farming cycle started");
-  const summary = { checked: 0, active: 0, failed: 0, skipped: 0, rotated: 0, synced: false };
+  const summary = { checked: 0, active: 0, failed: 0, skipped: 0, rotated: 0, synced: false, modelRecheck: null, combos: null };
   try {
     if (options.syncCatalog !== false) {
       const sync = await syncFreeLlmApiCatalog();
       summary.synced = !!sync.ok;
-      log(sync.ok ? "freellmapi catalog synced" : `catalog sync failed: ${sync.error}`, sync.ok ? "info" : "warn");
+      log(sync.ok ? "freellmapi catalog synced" : `catalog sync warning: ${sync.error || sync.warning || "fallback"}`, sync.ok ? "info" : "warn");
     }
     const conns = await getProviderConnections();
     for (const conn of conns || []) {
@@ -107,9 +109,35 @@ async function runCycle(options = {}) {
       }
       try { await updateProviderConnection(conn.id, patch); } catch {}
     }
+    // Model-level recheck: auto-disable models definitively unusable (token-frugal limits)
+    if (options.recheckModels) {
+      try {
+        const mr = await recheckProviderModels({
+          maxModelsPerProvider: options.maxModelsPerProvider || 20,
+          maxProviders: options.maxProviders || 30,
+          dryRun: !!options.dryRunModels,
+          autoEnable: !!options.autoEnableModels,
+        });
+        summary.modelRecheck = { checkedModels: mr.checkedModels, disabled: mr.disabled?.length || 0, enabled: mr.enabled?.length || 0 };
+        log(`Model recheck: checked ${mr.checkedModels}, disabled groups ${mr.disabled?.length || 0}`);
+      } catch (e) {
+        summary.modelRecheck = { error: e.message };
+        log(`Model recheck error: ${e.message}`, "warn");
+      }
+    }
     if (options.rotate !== false) {
       const rot = await rotateConnections({ strategy: options.rotateStrategy || "disable-failed" });
       summary.rotated = rot.rotated || 0;
+    }
+    // Optional: regenerate auto combos from healthy providers/models
+    if (options.generateCombos) {
+      try {
+        const cg = await generateAutoCombos({ maxCombos: options.maxCombos || 5, limitPerCombo: options.limitPerCombo || 4, overwrite: !!options.overwriteCombos });
+        summary.combos = { planned: cg.planned?.length || 0, results: cg.results?.length || 0 };
+        log(`Auto combos generated: ${cg.results?.length || 0}`);
+      } catch (e) {
+        summary.combos = { error: e.message };
+      }
     }
   } catch (e) {
     log(`Cycle error: ${e.message}`, "error");
@@ -157,6 +185,10 @@ export async function POST(request) {
     }
     if (action === "run") {
       const result = await runCycle(body);
+      return NextResponse.json({ ok: true, result });
+    }
+    if (action === "recheck-models") {
+      const result = await recheckProviderModels(body || {});
       return NextResponse.json({ ok: true, result });
     }
     if (action === "sync-catalog") {

@@ -73,12 +73,29 @@ export default function AccountFarmingPage() {
         res = await fetch("/api/farming/accounts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ connections: parsed, mode: importMode }) });
       } else if (action === "rotate") {
         res = await fetch("/api/farming/rotate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      } else if (action === "generate-combos") {
+        res = await fetch("/api/combos/generate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      } else if (action === "recheck-models") {
+        res = await fetch("/api/farming/worker", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "recheck-models", ...body }) });
       } else {
         res = await fetch("/api/farming/worker", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action, ...body }) });
       }
       const data = await res.json();
       if (!res.ok || data.ok === false) throw new Error(data.error || "Gagal");
-      setMessage({ type: "success", text: action === "import" ? `Import: +${data.imported||0}, update ${data.updated||0}, skip ${data.skipped||0}, gagal ${data.failed||0}` : "Berhasil" });
+      let text = "Berhasil";
+      if (action === "import") text = `Import: +${data.imported||0}, update ${data.updated||0}, skip ${data.skipped||0}, gagal ${data.failed||0}`;
+      else if (action === "recheck-models") {
+        const r = data.result || data;
+        const disabledCount = (r.disabled || []).reduce((n, x) => n + (x.ids?.length || 0), 0);
+        text = `Recheck model: checked ${r.checkedModels||0}, auto-disabled ${disabledCount} model (definitif tidak bisa dipakai)`;
+      } else if (action === "generate-combos") {
+        text = `Auto combo: ${data.results?.length || data.planned?.length || 0} item`;
+      } else if (action === "run") {
+        const r = data.result || {};
+        const disabledCount = ((r.modelRecheck?.disabled) || 0);
+        text = `Run selesai: checked ${r.checked||0}, active ${r.active||0}, failed ${r.failed||0}${r.modelRecheck ? `, model-disabled groups ${disabledCount}` : ""}`;
+      }
+      setMessage({ type: "success", text });
       if (action === "import") setImportText("");
       await load();
     } catch (e) {
@@ -99,7 +116,9 @@ export default function AccountFarmingPage() {
       actions={
         <div className="flex gap-2 flex-wrap">
           <Button size="sm" variant="outline" onClick={() => runAction("sync-catalog")} disabled={!!busy}>Sync Catalog</Button>
-          <Button size="sm" variant="outline" onClick={() => runAction("run")} disabled={!!busy}>Run Check</Button>
+          <Button size="sm" variant="outline" onClick={() => runAction("run", { recheckModels: false })} disabled={!!busy}>Run Check</Button>
+          <Button size="sm" variant="outline" onClick={() => runAction("recheck-models", { maxModelsPerProvider: 20, maxProviders: 30 })} disabled={!!busy}>Recheck Models</Button>
+          <Button size="sm" variant="outline" onClick={() => runAction("generate-combos", { maxCombos: 5, limitPerCombo: 4, overwrite: false })} disabled={!!busy}>Generate Combos</Button>
           <Button size="sm" onClick={() => runAction("start", { loopMinutes: 5 })} disabled={!!busy}>Start Loop (5m)</Button>
           <Button size="sm" variant="ghost" onClick={() => runAction("stop")} disabled={!!busy}>Stop</Button>
         </div>
@@ -130,10 +149,11 @@ export default function AccountFarmingPage() {
             <Button size="sm" variant="ghost" onClick={() => setImportText(EXAMPLE_IMPORT)}>Contoh</Button>
           </div>
           <textarea className="w-full h-48 rounded-md border border-border bg-surface p-2 text-xs font-mono" value={importText} onChange={e=>setImportText(e.target.value)} placeholder={EXAMPLE_IMPORT} />
-          <div className="mt-2 flex gap-2">
+          <div className="mt-2 flex gap-2 flex-wrap">
             <Button size="sm" onClick={() => runAction("import")} disabled={!!busy || !importText.trim()}>{busy==="import"?"Importing...":"Import"}</Button>
             <Button size="sm" variant="outline" onClick={() => runAction("rotate", { strategy: "round-robin" })} disabled={!!busy}>Rotate (RR)</Button>
             <Button size="sm" variant="outline" onClick={() => runAction("rotate", { strategy: "disable-failed" })} disabled={!!busy}>Disable Failed</Button>
+            <Button size="sm" variant="outline" onClick={() => runAction("run", { recheckModels: true, maxModelsPerProvider: 15, generateCombos: false })} disabled={!!busy}>Run + Recheck Models</Button>
           </div>
         </Card>
 

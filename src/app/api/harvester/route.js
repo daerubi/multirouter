@@ -6,6 +6,12 @@ export const dynamic = "force-dynamic";
 
 // Verified and active fresh proxy feeds (sorted by speed & working ratio)
 const HARVEST_FEEDS = [
+  // ProxyFly (free-proxy-list, auto-updated)
+  "https://cdn.jsdelivr.net/gh/proxifly/free-proxy-list@main/proxies/protocols/http/data.txt",
+  "https://cdn.jsdelivr.net/gh/proxifly/free-proxy-list@main/proxies/protocols/https/data.txt",
+  "https://cdn.jsdelivr.net/gh/proxifly/free-proxy-list@main/proxies/all/data.txt",
+  "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/http/data.txt",
+  "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/https/data.txt",
   "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt",
   "https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/generated/http_proxies.txt",
   "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/http.txt",
